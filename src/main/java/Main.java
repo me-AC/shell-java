@@ -11,11 +11,14 @@ public class Main {
             String input = scanner.nextLine();
 
             switch (input) {
+                case "exit 0":
+                    System.exit(0);
+                    break;
                 default:
                     System.out.println(input+": not found");
                     break;
             }
-            
+
             System.out.print("$ ");
         }
     }
