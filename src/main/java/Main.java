@@ -9,11 +9,14 @@ public class Main {
 
         while (true) {
             String input = scanner.nextLine();
+
             switch (input) {
                 default:
                     System.out.println(input+": not found");
                     break;
             }
+            
+            System.out.print("$ ");
         }
     }
 }
