@@ -7,5 +7,11 @@ public class Main {
 
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
+
+        switch (input) {
+            default:
+                System.out.println(input+": not found");
+                break;
+        }
     }
 }
