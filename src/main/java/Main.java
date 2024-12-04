@@ -1,28 +1,37 @@
 import java.util.*;
 
 public class Main {
-    public static void main(String[] args) throws Exception {
-        // Uncomment this block to pass the first stage
-        System.out.print("$ ");
 
+    static private String input="";
+
+    static private String nextToken() {
+        String token="";
+        for(int i=0;i<input.length();i++) {
+            if(input.charAt(i)==' ') {
+                input=input.substring(i+1);
+                return token;
+            }
+            token+=input.charAt(i);
+        }
+        return input;
+    }
+
+
+    public static void main(String[] args) throws Exception {
+        System.out.print("$ ");
         Scanner scanner = new Scanner(System.in);
         
         while (true) {
-            String input = scanner.nextLine();
-            StringTokenizer st=new StringTokenizer(input," ");
-            switch (st.nextToken()) {
+            input = scanner.nextLine();
+
+            switch (nextToken()) {
                 case "exit":
-                    System.exit(st.hasMoreTokens() ? Integer.parseInt(st.nextToken()) : 0);
+                    System.exit((input!="") ? Integer.parseInt(input):0);
+                    scanner.close();
                     break;
 
                 case "echo":
-                    // while(st.hasMoreTokens())
-                    //     System.out.print(st.nextToken()+ " ");
-                    // System.out.println();
-                    for(int i=1;i<st.countTokens();i++) {
-                        System.out.print(st.nextToken()+" ");
-                    }
-                    System.out.println(st.nextToken());
+                    System.out.println(input);
                     break;
 
                 default:
