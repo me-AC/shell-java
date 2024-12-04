@@ -16,9 +16,13 @@ public class Main {
                     break;
 
                 case "echo":
-                    while(st.hasMoreTokens())
-                        System.out.print(st.nextToken()+ " ");
-                    System.out.println();
+                    // while(st.hasMoreTokens())
+                    //     System.out.print(st.nextToken()+ " ");
+                    // System.out.println();
+                    for(int i=1;i<st.countTokens();i++) {
+                        System.out.print(st.nextToken()+" ");
+                    }
+                    System.out.println(st.nextToken());
                     break;
 
                 default:
