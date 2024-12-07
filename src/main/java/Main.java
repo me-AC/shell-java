@@ -89,7 +89,7 @@ public class Main {
 					break;
 
 				default:
-					if (handleTypeExec(command) != null) {
+					if (!handleTypeExec(command).isEmpty()) {
 						command = command + " " + input;
 						handleExecution(command.split(" "));
 					} else
