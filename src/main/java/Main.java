@@ -49,7 +49,6 @@ public class Main {
     public static void main(String[] args) throws Exception {
         System.out.print("$ ");
         Scanner scanner = new Scanner(System.in);
-        System.out.println(args[0]);
 
         while (true) {
             input = scanner.nextLine();
