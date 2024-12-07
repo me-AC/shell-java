@@ -53,7 +53,7 @@ public class Main {
 			String output = "";
 
 			while ((output = reader.readLine()) != null) {
-				System.out.print(output);
+				System.out.println(output);
 			}
 			process.waitFor();
 		} catch (Exception e) {
