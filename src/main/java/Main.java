@@ -67,7 +67,7 @@ public class Main {
                     if (isBuiltin(input))
                         System.out.println(input + " is a shell builtin");
                     else if (handleExec(input) != "")
-                        System.out.println(input + "is" + handleExec(input));
+                        System.out.println(input + " is " + handleExec(input) + "/" + input);
                     else
                         System.out.println(input + ": not found");
                     break;
