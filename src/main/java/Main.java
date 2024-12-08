@@ -33,29 +33,22 @@ public class Main {
 	static private String handleTypeExec(String in) {
 		String[] paths = PATH.split(":");
 		for (String dir : paths) {
-			if (isExec(dir, in))
+			if (Files.exists(Paths.get(dir, in)))
 				return dir;
 		}
 		return "";
 	}
 
-	static private boolean isExec(String dir, String file) {
-		if (Files.exists(Paths.get(dir, file)))
-			return true;
-		return false;
-	}
-
 	static private void handleExecution(String[] program) {
 		try {
 			Process process = Runtime.getRuntime().exec(program);
-			// BufferedReader reader = new BufferedReader(new
-			// InputStreamReader(process.getInputStream()));
 			BufferedReader reader = process.inputReader();
 			String output = "";
 
 			while ((output = reader.readLine()) != null) {
 				System.out.println(output);
 			}
+
 			process.waitFor();
 		} catch (Exception e) {
 			System.out.println(e.getMessage());
@@ -86,13 +79,23 @@ public class Main {
 					else if (input.isEmpty())
 						System.out.println(input + ": not found");
 					else if (handleTypeExec(input) != "")
-						System.out.println(input + " is " + handleTypeExec(input) + "/" + input);
+						System.out.printf("%s is %s/%s%n", input, handleTypeExec(input), input);
 					else
 						System.out.println(input + ": not found");
 					break;
 
 				case "pwd":
 					System.out.println(PWD);
+					break;
+
+				case "cd":
+					if (input.isEmpty())
+						break;
+					else if (Files.isDirectory(Paths.get(input))) {
+						PWD = input;
+						System.setProperty("user.dir", input);
+					} else
+						System.out.printf("cd: %s: No such file or directory", input);
 					break;
 
 				default:
