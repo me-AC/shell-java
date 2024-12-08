@@ -6,7 +6,8 @@ public class Main {
 
 	static private String input = "";
 	static private String PATH = System.getenv("PATH");
-	static private String builtin_list[] = { "echo", "exit", "type" };
+	static private String PWD = System.getProperty("user.dir");
+	static private String builtin_list[] = { "echo", "exit", "type", "pwd" };
 
 	static private String nextToken() {
 		String token = "";
@@ -82,13 +83,23 @@ public class Main {
 				case "type":
 					if (isBuiltin(input))
 						System.out.println(input + " is a shell builtin");
+					else if (input.isEmpty())
+						System.out.println(input + ": not found");
 					else if (handleTypeExec(input) != "")
 						System.out.println(input + " is " + handleTypeExec(input) + "/" + input);
 					else
 						System.out.println(input + ": not found");
 					break;
 
+				case "pwd":
+					System.out.println(PWD);
+					break;
+
 				default:
+					if (command.isEmpty()) {
+						System.out.println(command + ": not found");
+						break;
+					}
 					if (!handleTypeExec(command).isEmpty()) {
 						command = command + " " + input;
 						handleExecution(command.split(" "));
@@ -96,6 +107,7 @@ public class Main {
 						System.out.println(command + ": not found");
 					break;
 			}
+
 			System.out.print("$ ");
 		}
 	}
