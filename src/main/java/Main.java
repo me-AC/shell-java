@@ -91,11 +91,15 @@ public class Main {
 				case "cd":
 					if (input.isEmpty())
 						break;
-					else if (input.startsWith("./")) {
+					else if (input.equals("~")) {
+						String HOME = System.getenv("HOME");
+						PWD = HOME;
+						System.setProperty("user.dir", PWD);
+					} else if (input.startsWith("./")) {
 						String abs_path = PWD.concat(input.substring(1));
 						if (Files.isDirectory(Paths.get(abs_path))) {
 							PWD = abs_path;
-							System.setProperty("user.dir", abs_path);
+							System.setProperty("user.dir", PWD);
 						} else
 							System.out.printf("cd: %s: No such file or directory%n", input);
 					} else if (input.startsWith("/") && Files.isDirectory(Paths.get(input))) {
