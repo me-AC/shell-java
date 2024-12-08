@@ -95,7 +95,7 @@ public class Main {
 						PWD = input;
 						System.setProperty("user.dir", input);
 					} else
-						System.out.printf("cd: %s: No such file or directory", input);
+						System.out.printf("cd: %s: No such file or directory%n", input);
 					break;
 
 				default:
