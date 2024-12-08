@@ -91,9 +91,22 @@ public class Main {
 				case "cd":
 					if (input.isEmpty())
 						break;
-					else if (Files.isDirectory(Paths.get(input))) {
+					else if (input.startsWith("./")) {
+						String abs_path = PWD.concat(input.substring(1));
+						if (Files.isDirectory(Paths.get(abs_path))) {
+							PWD = abs_path;
+							System.setProperty("user.dir", abs_path);
+						} else
+							System.out.printf("cd: %s: No such file or directory%n", input);
+					} else if (input.startsWith("/") && Files.isDirectory(Paths.get(input))) {
 						PWD = input;
 						System.setProperty("user.dir", input);
+					} else if (input.startsWith("../")) {
+						while (input.startsWith("../")) {
+							input = input.substring(3);
+							PWD = PWD.substring(0, PWD.lastIndexOf("/"));
+							System.setProperty("user.dir", PWD);
+						}
 					} else
 						System.out.printf("cd: %s: No such file or directory%n", input);
 					break;
@@ -104,7 +117,8 @@ public class Main {
 						break;
 					}
 					if (!handleTypeExec(command).isEmpty()) {
-						command = command + " " + input;
+						// command = String.join(" ", command, input);
+						command = command.concat(" ").concat(input);
 						handleExecution(command.split(" "));
 					} else
 						System.out.println(command + ": not found");
