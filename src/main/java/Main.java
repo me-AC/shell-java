@@ -56,10 +56,9 @@ public class Main {
 	}
 
 	public static void main(String[] args) throws Exception {
-		System.out.print("$ ");
 		Scanner scanner = new Scanner(System.in);
-
 		while (true) {
+			System.out.print("$ ");
 			input = scanner.nextLine();
 			String command = nextToken();
 			switch (command) {
@@ -121,7 +120,6 @@ public class Main {
 						break;
 					}
 					if (!handleTypeExec(command).isEmpty()) {
-						// command = String.join(" ", command, input);
 						command = command.concat(" ").concat(input);
 						handleExecution(command.split(" "));
 					} else
@@ -129,7 +127,7 @@ public class Main {
 					break;
 			}
 
-			System.out.print("$ ");
+			// System.out.print("$ ");
 		}
 	}
 }
